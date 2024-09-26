@@ -1,0 +1,20 @@
+---
+title: "The Impact of Renewable Energy Adoption on CO2 Emission Reductions"
+author: "Faber Bickerstaffe, Antoine Magning, and Robin Michel"
+css: custom.css
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format:
+  html:
+    self-contained: true
+    number-sections: true
+    toc: true
+    toc-float:
+      collapsed: false
+      smooth-scroll: true
+      toc-headers: "h1, h2, h3"
+fig-responsive: false
+---
+
+
+```{r echo = FALSE, message = FALSE, warning=FALSE, child = c('intro.qmd', 'data.qmd', 'eda.qmd', 'analysis.qmd', 'concl.qmd')}
+```

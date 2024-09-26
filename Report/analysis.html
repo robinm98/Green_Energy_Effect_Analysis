@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="analysis_files/libs/quarto-html/quarto.js"></script>
+<script src="analysis_files/libs/quarto-html/popper.min.js"></script>
+<script src="analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="analysis_files/libs/quarto-html/anchor.min.js"></script>
+<link href="analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="analysis_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="analysis_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="analysis" class="level1">
+<h1>4 Analysis</h1>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Embarking on the analysis phase, we move beyond basic and multivariate comparisons to delve into the intricacies of our dataset. Visual trends have highlighted a global transition to sustainable energy sources, propelled by a blend of environmental awareness, policy incentives, and technological advancements. While the initial years emphasized hydroelectric dominance, subsequent decades saw the rise of nuclear, solar, and wind amid a continuous growth in emissions. Now, our focus shifts to a nuanced exploration of the evolving relationship between renewable energy, CO2 emissions, and air quality. Our aim is to unravel any complexities and unveil insights into the dynamic interplay, providing a deeper understanding of the forces shaping our sustainable energy landscape.</p>
+<section id="the-models" class="level2">
+<h2 class="anchored" data-anchor-id="the-models">The Models</h2>
+<p>In scrutinizing the Correlation Matrix detailed in section 3.1.3, a preliminary observation unfolded: renewable sources exhibit varying degrees of negative correlation with CO2 emissions. Specifically possessing the following correlation values, Wind (-0.188), Solar (-0.089), Geo (-0.025), Hydro (-0.04), and Nuclear (-0.156). Wind and Nuclear stand out as statistically significant contributors to this relationship. Despite these findings, the magnitudes of these correlations are somewhat modest, leaving room for deeper exploration.</p>
+<p>Our quest for understanding the intricate relationship between CO2 emissions and renewables persists. Analysis in section 3.4.1, “Comparing Renewable Generation and CO2,” reveals a nuanced narrative. Contrary to expectations, an increase in renewable energy production coincides with higher CO2 emissions. Noteworthy anomalies, represented by small wealthy nations, challenge the general trend by either surpassing their expected CO2 per capita estimate or exhibiting elevated renewable energy production per capita.</p>
+<section id="basic-multiple-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="basic-multiple-linear-regression">Basic Multiple Linear Regression</h3>
+<p>To address our first research question of “To what extent does sustainable energy generation impact carbon dioxide emissions?”, we began by constructing a basic multiple linear regression model using raw_df, transforming all values into logarithmic scales for both total emissions and total renewable energy generated by each country.</p>
+<p><span class="math display">\[logCO2 = {\beta}_0 + logwind{\beta}_1 + logsolar{\beta}_2 + loggeo{\beta}_3 + loghydro{\beta}_4+ lognuclear{\beta}_5 + \epsilon\]</span></p>
+<div class="cell" data-layout-align="center">
+
+<table class="center">
+</table><table style="text-align:center">
+<caption>
+<strong>CO2 Basic Logarithmic Multiple Linear Regression</strong>
+</caption>
+<tbody><tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+log_CO2
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_wind
+</td>
+<td>
+0.025<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.012)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_solar
+</td>
+<td>
+-0.014
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.010)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_geo
+</td>
+<td>
+0.108<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.015)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_hydro
+</td>
+<td>
+0.215<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.010)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_nuclear
+</td>
+<td>
+0.341<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.014)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+17.600<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.029)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+3,250
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.390
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.389
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+1.240 (df = 3244)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+416.000<sup>***</sup> (df = 5; 3244)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></em></sup><em>p&lt;0.1; <sup><strong></strong></sup><strong>p&lt;0.05; <sup></sup></strong></em>p&lt;0.01
+</td>
+</tr>
+
+</tbody></table>
+
+</div>
+<p>At a glance of our basic model notable insights emerge. The pivotal p-values linked to each variable offer valuable interpretive cues. Wind, geothermal, hydro, and nuclear energies exhibit p-values below 0.05, indicating statistical significance in their relationship with CO2 emissions. However, solar energy’s p-value surpasses this threshold, suggesting a non-significant impact on CO2 emissions within this model.</p>
+<p>Intriguingly, we need to consider the positive correlation reflected in all coefficients with significant p-values, particularly noteworthy in the cases of Hydro and Nuclear energies, strongly influencing the rate of CO2 change. The marginal associations of Wind and Solar energy may find explanation in their emergence as globally prevalent renewable sources, gaining prominence since the turn of the century.</p>
+<p>While the model’s R-squared value of approximately 39% implies potential explanatory power, reservations linger. We remain cautious about inferring causation from this model alone. Despite its ability to provide a substantial portion of the relationship between renewable energy and CO2 emissions, the broader socio-economic context plays a pivotal role. Our society’s continual quest for production and economic expansion inherently accompanies an increase in CO2 emissions. Simultaneously, the integration of new technologies, including renewable energies, further complicates the intricate relationship between environmental factors and human activities.</p>
+</section>
+<section id="fixed-time-effect-model" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-time-effect-model">Fixed Time Effect Model</h3>
+<p>The fixed time effect model is a robust approach for our dataset, accounting for time-specific variations across the observed years. This model is particularly apt when we anticipate and want to control for potential time-dependent factors that could influence the relationship between renewable energy variables and CO2 emissions. The ‘Within Model’ specification implies that individual country-specific effects are removed, isolating the time-specific changes and offering a more focused examination of the impact of renewable energy sources.</p>
+<div class="cell" data-layout-align="center">
+
+<table style="text-align:center">
+<caption>
+<strong>CO2 Fixed Time Logarithmic Multiple Linear Regression</strong>
+</caption>
+<tbody><tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+log_CO2
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_wind
+</td>
+<td>
+0.029<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.012)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_solar
+</td>
+<td>
+0.008
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.011)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_geo
+</td>
+<td>
+0.109<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.015)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_hydro
+</td>
+<td>
+0.215<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.010)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_nuclear
+</td>
+<td>
+0.311<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.014)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+3,250
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.364
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.355
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+367.000<sup>***</sup> (df = 5; 3200)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></em></sup><em>p&lt;0.1; <sup><strong></strong></sup><strong>p&lt;0.05; <sup></sup></strong></em>p&lt;0.01
+</td>
+</tr>
+
+</tbody></table>
+</div>
+<p>In delving into the results of the new model, several familiar insights emerge. Somewhat noteworthy is that, all renewable energy sources, except solar, again exhibit statistically significant effects on CO2 emissions. Wind, geothermal, hydro, and nuclear energies showcase coefficients with p-values less than 0.05, indicating significant impact.</p>
+<p>Hydro and nuclear energies continue to display positive correlations with CO2 emissions, while wind energy demonstrates a positive albeit smaller effect. These results mirror our previous model’s findings, emphasizing the intricate dynamics within the renewable energy landscape. The model’s comparatively reduced R-squared value of approximately 36.4% still indicates a substantial portion of the variance in CO2 emissions is explained by the included variables.</p>
+</section>
+<section id="dataframe-adjustment" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe-adjustment">Dataframe Adjustment</h3>
+<p>Having found what we believe to be the most suitable model of a fixed time effect, we need to assess the data we were using and its relevance. In particular, for results pertaining to Solar and Wind Generation. Opting for the <code>raw_1990</code> dataset over the broader <code>raw_df</code> offers several advantages for our analysis. Focusing on data from 1990 onwards allows for a more recent examination of the relationship between renewable energy generation and CO2 emissions.By narrowing the timeframe, we ensure that the data captures more relevant and representative information regarding the current state of various energy sources. Additionally, limiting the scope to post-1990 data facilitates a more consistent and comparable analysis across countries and energy types, aligning with a period marked by increased global attention to sustainable practices and greater advancements in renewable energy technologies. Overall, the <code>raw_1990</code> dataset provides a refined lens through which we can discern the dynamics of renewable energy’s impact on CO2 emissions.</p>
+<div class="cell" data-layout-align="center">
+
+<table style="text-align:center">
+<caption>
+<strong>CO2 Fixed Time Logarithmic Multiple Linear Regression Since 1990</strong>
+</caption>
+<tbody><tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+log_CO2
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_wind
+</td>
+<td>
+0.039<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.011)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_solar
+</td>
+<td>
+0.009
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.010)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_geo
+</td>
+<td>
+0.097<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.015)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_hydro
+</td>
+<td>
+0.175<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.012)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+log_nuclear
+</td>
+<td>
+0.305<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.015)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+2,002
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.413
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.404
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+277.000<sup>***</sup> (df = 5; 1971)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></em></sup><em>p&lt;0.1; <sup><strong></strong></sup><strong>p&lt;0.05; <sup></sup></strong></em>p&lt;0.01
+</td>
+</tr>
+
+</tbody></table>
+</div>
+<ul>
+<li><p><strong>log_wind</strong>: For a one-unit increase in the natural logarithm of wind energy generation, the natural logarithm of CO2 emissions is estimated to increase by approximately 0.0395 units. This positive coefficient suggests that higher wind energy generation is associated with an increase in CO2 emissions.</p></li>
+<li><p><strong>log_solar</strong>: For a one-unit increase in the natural logarithm of solar energy generation, the natural logarithm of CO2 emissions is estimated to increase by approximately 0.0087 units. Similar to wind, this positive coefficient implies that increased solar energy generation is associated with a slight increase in CO2 emissions, though the effect is smaller.</p></li>
+<li><p><strong>log_geo</strong>: For a one-unit increase in the natural logarithm of geothermal energy generation, the natural logarithm of CO2 emissions is estimated to increase by approximately 0.0972 units. This positive coefficient suggests that higher geothermal energy generation is associated with an increase in CO2 emissions.</p></li>
+<li><p><strong>log_hydro</strong>: For a one-unit increase in the natural logarithm of hydro energy generation, the natural logarithm of CO2 emissions is estimated to increase by approximately 0.1746 units. This positive coefficient implies that increased hydro energy generation is associated with a notable increase in CO2 emissions.</p></li>
+<li><p><strong>log_nuclear</strong>: For a one-unit increase in the natural logarithm of nuclear energy generation, the natural logarithm of CO2 emissions is estimated to increase by approximately 0.3054 units. This positive coefficient suggests that higher nuclear energy generation is associated with a substantial increase in CO2 emissions.</p></li>
+</ul>
+<p>The analysis, conducted using a fixed-effects model, reveals that sustainable energy generation has a substantial impact on carbon dioxide emissions. The overall model, with an R-squared value of approximately 41.3%, indicates that around 41.3% of the variation in CO2 emissions can be explained by the included sustainable energy variables of, wind, solar, geothermal, hydro, and nuclear energies. This suggests a strong connection between the adoption of these sustainable energy sources and the increase in carbon dioxide emissions.</p>
+</section>
+<section id="interpreting" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting">Interpreting</h3>
+<p>The observation that increasing renewable energy generation is associated with increased CO2 emissions in our model might seem counterintuitive at first glance, but several factors could contribute to this phenomenon:</p>
+<p><strong>Infrastructure Development</strong>: The initial stages of adopting renewable energy often involve significant infrastructure development, which can be energy-intensive and may rely on conventional energy sources. The manufacturing, installation, and setup of renewable energy facilities, such as wind farms, solar arrays, nuclear power plants, and dams, can significantly contribute to CO2 emissions.</p>
+<p><strong>Economic Growth</strong>: Increased adoption of renewable energy is occurring simultaneously with economic growth. As economies expand, there is often a rise in energy demand, leading to increased overall energy production, including both renewable and non-renewable sources.</p>
+<p><strong>Global Supply Chain</strong>: The global supply chain for renewable technologies involves transportation and manufacturing processes that contribute to CO2 emissions. The extraction of raw materials for renewable technologies also has environmental impacts.</p>
+<p><strong>Lag in Emission Reduction</strong>: The transition to renewable energy is a process, and the full benefits in terms of reduced CO2 emissions might take time to materialize. During the transition, there may be a period where the growth in renewable energy is still accompanied by the use of conventional energy sources.</p>
+<p>It’s essential to consider these nuances and contextual factors when interpreting the relationship between renewable energy generation and CO2 emissions. As renewable energy infrastructure becomes more established and technology improves, we may see reductions in CO2 emissions.</p>
+</section>
+</section>
+<section id="modeling-pm-2.5" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-pm-2.5">Modeling PM 2.5</h2>
+<p>Continuing with our analysis, we needed to investigate the effects of renewable energy on improving air quality in countries transitioning to cleaner sources of energy. In this model, we opted not to take the logarithm of the energy sources and PM2.5 exposure. The decision was made to maintain the original scale, facilitating a better interpretation of the coefficients.<code>raw_1990</code> remained as the dataset for the model and this decision was based on the fact that all our data for <code>PM_exposure</code> is available post-1990. Additionally, we continued employing the fixed-effects model for our analysis.</p>
+<div class="cell" data-layout-align="center">
+
+<table style="text-align:center">
+<caption>
+<strong>PM2.5 Fixed Time Multiple Linear Regression Since 1990</strong>
+</caption>
+<tbody><tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+PM_exposure
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+wind_generation
+</td>
+<td>
+0.148<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.044)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+solar_generation
+</td>
+<td>
+-0.044
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.085)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+geo_generation
+</td>
+<td>
+-0.287<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.079)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+hydro_generation
+</td>
+<td>
+0.012<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.006)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+nuclear_generation
+</td>
+<td>
+-0.030<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.007)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+1,078
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.056
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.040
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+12.500<sup>***</sup> (df = 5; 1059)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></em></sup><em>p&lt;0.1; <sup><strong></strong></sup><strong>p&lt;0.05; <sup></sup></strong></em>p&lt;0.01
+</td>
+</tr>
+
+</tbody></table>
+</div>
+<ul>
+<li><p><strong>wind_generation</strong>: A one-unit increase in wind energy generation is associated with a 0.1478-unit increase in PM2.5 exposure. This suggests that higher wind energy generation is linked to a moderate increase in PM2.5 exposure.</p></li>
+<li><p><strong>solar_generation</strong>: The coefficient for solar generation is -0.0440, indicating a slight negative association. However, it is not statistically significant (p-value = 0.605), suggesting that solar energy generation might not have a substantial impact on PM2.5 exposure in this model.</p></li>
+<li><p><strong>geo_generation</strong>: A one-unit increase in geothermal energy generation is associated with a 0.2872-unit decrease in PM2.5 exposure. This implies that higher geothermal energy generation is linked to a reduction in PM2.5 exposure.</p></li>
+<li><p><strong>hydro_generation</strong>: A one-unit increase in hydro energy generation is associated with a 0.0122-unit increase in PM2.5 exposure. This coefficient is statistically significant (p-value = 0.049), suggesting a modest positive association between hydro energy generation and PM2.5 exposure.</p></li>
+<li><p><strong>nuclear_generation</strong>: A one-unit increase in nuclear energy generation is associated with a 0.0303-unit decrease in PM2.5 exposure. This coefficient is statistically significant (p-value &lt; 0.001), indicating that higher nuclear energy generation is linked to a reduction in PM2.5 exposure.</p></li>
+</ul>
+<p>The R-squared value of 0.0557 suggests that the included energy generation variables explain about 5.57% of the variation in PM2.5 exposure. A low R-squared value could be attributed to several factors:</p>
+<p><strong>Missing Variables</strong>: There are clearly many unaccounted-for factors influencing PM2.5 exposure that are not included in our model.</p>
+<p><strong>Complexity of PM2.5 Formation</strong>: PM2.5 is influenced by various sources, including industrial activities, traffic, and meteorological conditions. The model does not capture the full complexity of these interactions.</p>
+<p><strong>Spatial and Temporal Variability</strong>: PM2.5 levels can vary significantly across different regions within countries. A fixed-effects model with specification only to the country level may not fully capture this variability.</p>
+<p>While the R-squared value is low, the individual coefficients possibly provide valuable insights into the specific impacts of each energy generation type on PM2.5 exposure in your dataset. Further exploration and consideration of additional factors may enhance the model’s explanatory capacity.</p>
+<p>To what extent does sustainable energy generation impact carbon dioxide emissions? 2. What are the key factors and types of sustainable energy sources that have the most significant impact on reducing CO2 emissions? 3. How does sustainable energy generation impact the quality of air (reduction of PM 2.5)? 4. Is there a temporal trend between the growth of sustainable energy generation and the reduction in CO2 emissions and what implications does this trend hold for future sustainability efforts?</p>
+<ul>
+<li>Answers to the research questions</li>
+<li>Different methods considered</li>
+<li>Competing approaches</li>
+<li>Justifications</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

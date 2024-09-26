@@ -1,0 +1,444 @@
+# Data
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+source(here::here("Transcript/setup.R"))
+source(here::here("Transcript/Data extraction.R"))
+```
+
+## Data sources and description
+
+### Renewable energy generations
+We collected our first database from the “Energy Institute” that provides a full database on energy generations and emissions. We used this database to gather information about each country's sustainable energy generation from renewable sources such as wind, solar, hydro, nuclear,  geothermal, and others. This data base initially came from an .xlsx format with 62 sheets which we had to convert into a data frames.
+
+Source: [https://www.energyinst.org/statistical-review/resources-and-data-downloads](https://www.energyinst.org/statistical-review/resources-and-data-downloads])
+
+From this extensive database, we concentrated specifically on the relevant data variables that aligned with our project objectives (table 1.1).
+
+```{r}
+# Creating the table
+data_table <- tibble(
+  Variables = c("Country","Year","Geo Biomass Other - TWh", "Hydro Generation - TWh", "Nuclear Generation - TWh", "Solar Generation - TWh", "Wind Generation - TWh"),
+  Meaning = c("Country","Year","TWh generation from Geothermal and others", "TWh generation from Hydro", "TWh generation from Nuclear", "TWh generation from Solar", "TWh generation from Wind")
+)
+
+# Rendering the table with knitr::kable
+knitr::kable(data_table, format = "html", caption = "Table 1.1: Energy Generation Sources Database")
+```
+
+### CO2 Emissions
+Our second database, sourced from "Climate Watch", provides data on CO2 emissions per capita by country. This essential resource enabled us to analyze and compare the carbon footprint across nations, offering insights into the impact of sustainable practices on emissions.
+
+Source: [https://www.climatewatchdata.org/data-explorer](https://www.climatewatchdata.org/data-explorer)
+
+```{r}
+# Creating the table
+data_table <- tibble(
+  Variables = c("Country","Year","CO2 emissions"),
+  Meaning = c("Country","Year","Annual CO₂ emissions (per capita)")
+)
+
+# Rendering the table with knitr::kable
+knitr::kable(data_table, format = "html", caption = "Table 1.2: CO2 Emissions Database")
+```
+
+### PM2.5 exposure
+The third key database was obtained from "The World Bank". This comprehensive database collates data on PM2.5 levels. PM2.5 refers to particulate matter that is 2.5 micrometers or smaller in diameter. These fine particles are a significant concern to the environment's health because they can penetrate deep into the lungs and enter the bloodstream, potentially causing serious health problems. Monitoring PM2.5 levels is essential for assessing air quality and understanding the health impacts of air pollution. By analyzing this data, we aim to explore the correlation between energy generation methods and air quality, particularly how the adoption of sustainable energy sources might influence the reduction of PM2.5 levels and improve overall air health.
+
+Source: [https://databank.worldbank.org/reports.aspx?source=2%20&series=EN.ATM.PM25.MC.M3&country=#](https://databank.worldbank.org/reports.aspx?source=2%20&series=EN.ATM.PM25.MC.M3&country=#)
+
+```{r}
+# Creating the table
+data_table <- tibble(
+  Variables = c("Country","Year","PM2.5"),
+  Meaning = c("Country","Year","Number of particules that is 2.5 micrometers or smaller (in µg/m³)")
+)
+
+# Rendering the table with knitr::kable
+knitr::kable(data_table, format = "html", caption = "Table 1.3: PM2.5 Emissions Database")
+```
+
+### Population
+In order to accurately calculate our renewable energy generation per capita, we have also incorporated a comprehensive global population database, sourced again from "The World Bank". This additional data enables us to normalize energy generation figures against population sizes, ensuring a more precise and meaningful analysis of renewable energy's impact on a per capita basis.
+
+Source: [https://databank.worldbank.org/reports.aspx?source=2&series=SP.POP.TOTL&country=#](https://databank.worldbank.org/reports.aspx?source=2&series=SP.POP.TOTL&country=#)
+
+```{r}
+# Creating the table
+data_table <- tibble(
+  Variables = c("Country","Year","Population"),
+  Meaning = c("Country","Year","Number of inhabitants in the country")
+)
+
+# Rendering the table with knitr::kable
+knitr::kable(data_table, format = "html", caption = "Table 1.4: PM2.5 Emissions Database")
+```
+
+## Data wrangling
+
+During the data wrangling phase, we processed four distinct datasets, each demanding a tailored approach to cleaning and wrangling. These was necessary to guarantee the datasets' suitability for our subsequent analysis. The end result of these efforts was the creation of a consolidated and final dataframe, named `raw_df`.
+
+### Merged_renew dataframe
+
+The first dataframe that we focused our efforts on was a comprehensive dataframe dedicated to renewable energy. This dataframe originated from an excel file comprised of 62 sheets. In order to access the pertinent data we had to extract five specific sheets, each corresponding to distinct sources of global renewable energy generation, and arrived in wide format. 
+
+<details>
+<summary>Code</summary>
+```r
+#    merged_renew    #
+######################
+
+# Specify the file path
+path_renew <- here::here("Data/Data_sustainable_energy.xlsx")
+
+# Define the names of the excel sheets
+Renewables_sheets <- c("Wind Generation - TWh", "Solar Generation - TWh", "Geo Biomass Other - TWh", "Hydro Generation - TWh", "Nuclear Generation - TWh")
+
+# Read the specific sheets into a list of dataframes
+Renewables_list <- lapply(Renewables_sheets, function(sheet_name) {
+  read_xlsx(path_renew, sheet = sheet_name)
+})
+
+# Name the dataframes
+names(Renewables_list) <- Renewables_sheets
+
+# Bring the dataframes to the global environment
+list2env(Renewables_list ,.GlobalEnv)
+```
+</details>
+
+Following the initial data extraction, our next step involved refining the structure of the dataframes. As the data originated from an Excel format that included buffer rows unsuitable for our analytical purposes, we needed to remove these unnecessary entries. Our largest challenge arose from the fact that our dataframes were initially organized in a wide format. We needed a versatile function capable of transforming these dataframes into a long format, whilst also taking into account changing the type of the `year` variable, and addressing issues such as superfluous columns. Resulting in a standardized long format for comprehensive analysis.
+
+<details>
+<summary>Code</summary>
+```r
+# Function to pivot our df
+process_data <- function(df) {
+
+  # Set the coerced years as column names
+  # Extract the years from the first row of the data frame and coerce them to integers
+  colnames(df) <- as.integer(as.character(df[1, ]))  
+  
+  # Remove the first row (useless)
+  df <- df[-1,]
+  
+  # Rename the first column to "country"
+  colnames(df)[1] <- "country"
+  
+  # We delete 3 columns (they have no interest and useless columns)
+  df <- df[, head(seq_along(df), -3)]
+  
+  # Pivot of the data
+  long_format_df <- df %>%
+    tidyr::pivot_longer(
+      cols = -country,   # Select all columns except the "country"
+      names_to = "year", # Column names go into the "year" column
+      values_to = "TWh"  # Values go into the "TWh" column
+    )
+  
+  return(long_format_df)
+}
+
+# Use process_data to get our pivot df
+wind_df <- process_data(Cleaned_Renewables_list[[1]])
+solar_df <- process_data(Cleaned_Renewables_list[[2]])
+geo_df <- process_data(Cleaned_Renewables_list[[3]])
+hydro_df <- process_data(Cleaned_Renewables_list[[4]])
+nuclear_df <- process_data(Cleaned_Renewables_list[[5]])
+```
+
+</details>
+
+The final step before merging our 5 renewable energy dataframes was to rename their value column to `"sources"_generation`, as it was necessary to differentiate between each source. Initially, they were all named "TWh". Finally we merged each renewable energy dataframes into `merged_renew`.
+
+<details>
+<summary>Code</summary>
+```r
+#      Merge our renewables energies df's    #
+##############################################
+
+# Rename columns in the original dataframes
+wind_df <- wind_df %>%
+  rename(wind_generation = TWh)
+solar_df <- solar_df %>%
+  rename(solar_generation = TWh)
+geo_df <- geo_df %>%
+  rename(geo_generation = TWh)
+hydro_df <- hydro_df %>%
+  rename(hydro_generation = TWh)
+nuclear_df <- nuclear_df %>%
+  rename(nuclear_generation = TWh)
+
+# Sequentially merge the dataframes
+merged_renew <- wind_df %>%
+  merge(solar_df, by = c("country", "year"), all = FALSE) %>%
+  merge(geo_df, by = c("country", "year"), all = FALSE) %>%
+  merge(hydro_df, by = c("country", "year"), all = FALSE) %>%
+  merge(nuclear_df, by = c("country", "year"), all = FALSE)
+```
+</details>
+
+Once our dataframe was merged, we noticed that some countries were consistently missing values. On closer observation, these countries all had a geopolitical change at some point in time which altered the collection of data. For example, before the dissolution of USSR, values were not present prior to that year for many countries.
+
+<details>
+<summary>Code</summary>
+```r
+# Convert "year" to numeric in merged_renew and drop NA for countries with a geopolitical change
+merged_renew <- merged_renew %>%
+  mutate(year = as.numeric(year)) %>%
+    filter(!(
+      (country %in% c("Slovenia", "Croatia", "North Macedonia") & year < 1990) | # Remove year under 1990 for those 3 countries as they were part from yugoslavia so we can't have data before 1990
+      (country %in% c("Azerbaijan", "Belarus", "Latvia", "Lithuania", "Kazakhstan", "Russian Federation", "Ukraine", "Estonia", "Turkemenistan", "Uzbekistan") & year < 1984) | # Remove year under 1984 for those countries as they were part from USSR so we can't have data before 1984
+      (country == "Bangladesh" & year < 1970) # Remove year under 1970 for Bangladesh as it was part from India so we can't have data before 1970
+         )) 
+```
+</details>
+
+### CO2 emissions, population and PM2.5 dataframes
+
+For the `co2_df`, `Pop_df`, and `PM_df` dataframes we performed typical wrangling steps, which consisted of removing missing values, renaming columns to ensure a consistent structure and pivoting. One particular challenge was changing the format of the years using the gsub function, e.g "1965" had the following format "1965[YR1965]". 
+
+<details>
+<summary>Code</summary>
+```r
+#      co2_df      #
+####################
+
+# Rename columns of co2_df
+co2_df <- co2_df %>%
+  rename(`CO2_emissions` = `Annual CO₂ emissions (per capita)`) %>%
+  rename(country = Entity) %>%
+  rename(year = Year)
+
+# Convert the "year" column to numeric in co2_df
+co2_df <- co2_df %>%
+  mutate(year = as.numeric(year))
+
+# Check if CO2_df contains missing values : NA or ".."
+missing_values <- any(is.na(co2_df) | co2_df == "..")
+```
+</details>
+
+_Note: The same steps were more or less followed for `PM_df` and `Pop_df`._
+
+### raw_df
+
+Once our 4 dataframes (`merged_renew`, `co2_df`, `PM_df`, `Pop_df`), were wrangled and cleaned we commenced the merging process. However, once merged, we noticed some important countries were no longer present. After checking our datasets, we found discrepancies in the naming of the countries. In fact, between the 4 dataframes, before merging, the country names weren't standardized. Therefore, we standardized the country name to correspond to `merged_renew` naming.
+
+<details>
+<summary>Code</summary>
+```r
+#   raw_df    #
+###############
+
+#      Country name replacements for Pop, CO2, PM dfs   
+# --> to standardize the country names in our final df as there is some change between the data sets
+
+# List of country name replacements
+country_replacements <- c(
+  "United States" = "US", "Czechia" = "Czech Republic", "Egypt, Arab Rep." = "Egypt",
+  "Iran, Islamic Rep." = "Iran", "Russia" = "Russian Federation",
+  "Slovak Republic" = "Slovakia", "Korea, Rep." = "South Korea",
+  "Trinidad and Tobago" = "Trinidad & Tobago", "Turkiye" = "Turkey",
+  "Venezuela, RB" = "Venezuela")
+
+# Define a function to apply country renaming to a dataset
+rename_countries <- function(df) {
+  df %>%
+    mutate(country = ifelse(country %in% names(country_replacements),
+                            country_replacements[country],
+                            country))
+}
+
+# Apply the renaming to the Pop_df, CO2_df, and PM_df
+Pop_df <- rename_countries(Pop_df)
+co2_df <- rename_countries(co2_df)
+PM_df <- rename_countries(PM_df)
+```
+</details>
+
+Then we merged our 4 dataframes into `raw_df` with a left join on `merged_renew`.
+
+<details>
+<summary>Code</summary>
+```r
+#     Merge PM_df, CO2_df, Pop_df with merged_renew     #
+#########################################################
+
+raw_df <- merged_renew %>%
+  left_join(PM_df, by = c("country", "year")) %>%
+  left_join(co2_df, by = c("country", "year")) %>%
+  left_join(Pop_df, by = c("country", "year"))
+# raw_df contains all the renewable energy generation, co2 emissions per capita and PM exposure of all countries and all years from 1965 to 2022
+
+# Arrange column order to have dependent variables first
+raw_df <- raw_df %>%
+  select(1:2, CO2_emissions, PM_exposure, 3:ncol(.)) 
+```
+</details>
+
+From `raw_df`, we noticed that some observations weren't countries but regions, or groupings of countries such as continents, organisations (OCDE), and others. We then checked all the non country observations to remove them. Finally, we end up with the following dataframe : 
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+# Set the working directory
+setwd(here::here("Transcript"))
+
+# Load and run the data extraction script
+source("Data extraction.R")
+kable(sample_n(raw_df, 15))
+```
+_Note: Sample of `raw_df`. For PM_exposure, we only have observations for 1990, 1995, 2000, 2005, 2010-2019, hence the NAs for that column._
+
+### Filtering raw_df for deeper analysis
+
+With `raw_df`, we have all of the essentials data needed for deeper analysis. `raw_df` is composed of `r length(unique(raw_df$country))` countries with values ranging from 1965 to 2021 for `r nrow(raw_df)` observations with `r ncol(raw_df)` variables. We used this final dataframe as a basis for further analysis.
+
+From `raw_df`, we created a per capita dataframe, `all_df` by dividing our renewable energy variables by population. `all_df` is our second main dataframes as the primary difference with `raw_df` is that we have per capita values for all of our renewable energy variables. We used this dataframe when comparing CO2 emissions and renewable energy to standardize the scale.
+
+<details>
+<summary>Code</summary>
+```r
+#   all_df    #
+###############
+
+#  Drop any row without a Population  
+
+all_df <- raw_df %>% 
+  filter(complete.cases(Population)) # --> 77 countries
+# We voluntarily created a "raw_df" to have the total of energy generation, co2 emissions and PM exposure for all the years (independent from the population)
+# and then "all_df" where we remove missing values of population to compute renewable energy generation per capita
+
+
+#    Computing renewable energy generation variables per capita     #
+#####################################################################
+
+
+# Iterate through columns and divide by population
+for (colname in colnames(all_df)) {
+  # Skip the columns 'country', 'year', 'CO2_emissions', and 'Population'
+  if (!colname %in% c('country', 'year', 'CO2_emissions', 'Population')) {
+    
+    # Identify rows where the column value is not NA
+    valid_rows <- !is.na(all_df[[colname]])
+    
+    # Check if the entire column (excluding NA values) is numeric
+    if (all(sapply(all_df[valid_rows, colname], is.numeric))) {
+      
+      # Only perform operation on those valid rows
+      all_df[valid_rows, colname] <- all_df[valid_rows, colname] / all_df[valid_rows, 'Population']
+    }
+  }
+}
+```
+
+After creating `all_df`we created multiple sub dataframes filtering for years and separating developed and non developed countries :
+
+- All Countries
+- All Countries (Since 1990)
+- Developed Countries Only
+- Developed Countries (Since 1990)
+- Non-Developed Countries Only
+- Non-Developed Countries (Since 1990)
+
+Additionally, we multiplied each of the 6 datasets by 100. This scaling is particularly useful for log transformations in our analysis, enhancing the interpretability of results, especially when dealing with small per capita values.
+
+<details>
+<summary>Code</summary>
+```r
+#     df from 1990 to 2021       #
+##################################
+
+raw_1990 <- raw_df %>%
+  filter(year >= 1990, year <= 2021)
+
+all_1990 <- all_df %>%
+  filter(year >= 1990, year <= 2021)
+# We choose 1990 as before that date there weren't many renewable energy generations which doesn't help us to analyse a significant effect
+
+#    df with only developped countries    #
+###########################################
+
+
+# Create a list of developed countries
+developed_countries <- c("Australia", "Austria", "Belgium", "Canada", "Cyprus", 
+                         "Czech Republic", "Denmark", "Estonia", "Finland", "France", 
+                         "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Israel", 
+                         "Italy", "Japan", "Latvia", "Lithuania", "Luxembourg", 
+                         "Netherlands", "New Zealand", "Norway", "Poland", "Portugal", 
+                         "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", 
+                         "United Kingdom", "US", "South Korea", "Singapore", "Qatar", 
+                         "United Arab Emirates", "Mexico", "Saudi Arabia", "China")
+
+developed_df <- all_df %>% filter(country %in% developed_countries) # --> 40 countries with per capita values
+rawdev_df <- raw_df %>% filter(country %in% developed_countries) # --> 40 countries with total values
+
+#    df with only developped countries from 1990    #
+#####################################################
+
+developed_1990 <- developed_df %>%
+  filter(year >= 1990, year <= 2021)
+
+rawdev_1990 <- rawdev_df %>%
+  filter(year >= 1990, year <= 2021)
+
+#    df with non developped countries    #
+###########################################
+
+nondev_df <- all_df[!all_df$country %in% developed_countries, ] # --> 37 countries with per capita values
+rawnondev_df <- raw_df[!all_df$country %in% developed_countries, ] # --> 37 countries with total values
+
+
+#    df with non developped countries from 1990   #
+###################################################
+
+nondev_1990 <- nondev_df %>%
+  filter(year >= 1990, year <= 2021)
+  
+rawnondev_1990 <- rawnondev_df %>%
+  filter(year >= 1990, year <= 2021)
+
+#        multiply df by 100          #
+######################################
+# This will allow to make the log scaling more readable for our analysis as we have very low values per capita
+
+# all100_df : mutliply all_df by 100
+all100_df <- all_df %>%
+  mutate(across(
+    .cols = 3:9,
+    .fns = ~ . * 100
+  ))
+
+# raw100_df : mutliply raw_df by 100
+raw100_df <- raw_df %>%
+  mutate(across(
+    .cols = 3:9,
+    .fns = ~ . * 100
+  ))
+
+# raw100_1990 : keep only year from 1990 of raw100_df
+raw100_1990 <- raw100_df %>%
+  filter(year >= 1990, year <= 2021)
+
+# rawdev100_1990 : keep only year from 1990 and dev country
+
+rawdev100_1990 <- rawdev_df %>%
+  mutate(across(
+    .cols = 3:9,
+    .fns = ~ . * 100
+  ))  %>%
+  filter(year >= 1990, year <= 2021)
+
+# rawdev100_1990 : keep only year from 1990 and nondev country
+
+rawnondev100_1990 <- rawnondev_df %>%
+  mutate(across(
+    .cols = 3:9,
+    .fns = ~ . * 100
+  ))  %>%
+  filter(year >= 1990, year <= 2021)
+
+# Remove the intermediate df / lists
+rm(Pop_df, PM_df, co2_df, merged_renew, Cleaned_Renewables_list, geo_df, `Geo Biomass Other - TWh`, `Hydro Generation - TWh`, hydro_df, `Nuclear Generation - TWh`, nuclear_df, Renewables_list, `Solar Generation - TWh`, solar_df, `Wind Generation - TWh`, wind_df)
+```
+</details>
+
+

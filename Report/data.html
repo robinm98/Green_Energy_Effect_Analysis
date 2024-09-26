@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="data_files/libs/clipboard/clipboard.min.js"></script>
+<script src="data_files/libs/quarto-html/quarto.js"></script>
+<script src="data_files/libs/quarto-html/popper.min.js"></script>
+<script src="data_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="data_files/libs/quarto-html/anchor.min.js"></script>
+<link href="data_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="data_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="data_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="data_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="data_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="data" class="level1">
+<h1>2 Data</h1>
+<section id="data-sources-and-description" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources-and-description">2.1 Data sources and description</h2>
+<section id="renewable-energy-generations" class="level3">
+<h3 class="anchored" data-anchor-id="renewable-energy-generations">2.1.1 Renewable energy generations</h3>
+<p>We collected our first database from the “Energy Institute” that provides a full database on energy generations and emissions. We used this database to gather information about each country’s sustainable energy generation from renewable sources such as wind, solar, hydro, nuclear, geothermal,and others. This data base initially came from an .xlsx format with 62 sheets which we had to convert into a data frames.</p>
+<p>Source: <a href="https://www.energyinst.org/statistical-review/resources-and-data-downloads%5D">https://www.energyinst.org/statistical-review/resources-and-data-downloads</a></p>
+<p>From this extensive database, we concentrated specifically on the relevant data variables that aligned with our project objectives (table 1.1).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Table 1.1: Energy Generation Sources Database</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variables</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Country</td>
+<td style="text-align: left;">Country</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">Year</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Geo Biomass Other - TWh</td>
+<td style="text-align: left;">TWh generation from Geothermal and others</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hydro Generation - TWh</td>
+<td style="text-align: left;">TWh generation from Hydro</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Nuclear Generation - TWh</td>
+<td style="text-align: left;">TWh generation from Nuclear</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solar Generation - TWh</td>
+<td style="text-align: left;">TWh generation from Solar</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wind Generation - TWh</td>
+<td style="text-align: left;">TWh generation from Wind</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="co2-emissions" class="level3">
+<h3 class="anchored" data-anchor-id="co2-emissions">2.1.2 CO2 Emissions</h3>
+<p>Our second database, sourced from ‘Climate Watch’, provides data on CO2 emissions per capita by country. This essential resource enabled us to analyze and compare the carbon footprint across nations, offering insights into the impact of sustainable practices on emissions.</p>
+<p>Source: <a href="https://www.climatewatchdata.org/data-explorer">https://www.climatewatchdata.org/data-explorer</a></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Table 1.2: CO2 Emissions Database</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variables</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Country</td>
+<td style="text-align: left;">Country</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">Year</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CO2 emissions</td>
+<td style="text-align: left;">Annual CO₂ emissions (per capita)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="pm2.5-exposure" class="level3">
+<h3 class="anchored" data-anchor-id="pm2.5-exposure">2.1.3 PM2.5 exposure</h3>
+<p>The third key database was obtained from ‘The World Bank’. This comprehensive database collates data on PM2.5 levels. PM2.5 refers to particulate matter that is 2.5 micrometers or smaller in diameter. These fine particles are a significant concern to the environment’s health because they can penetrate deep into the lungs and enter the bloodstream, potentially causing serious health problems. Monitoring PM2.5 levels is essential for assessing air quality and understanding the health impacts of air pollution. By analyzing this data, we aim to explore the correlation between energy generation methods and air quality, particularly how the adoption of sustainable energy sources might influence the reduction of PM2.5 levels and improve overall air health.</p>
+<p>Source: <a href="https://databank.worldbank.org/reports.aspx?source=2%20&amp;series=EN.ATM.PM25.MC.M3&amp;country=#">https://databank.worldbank.org/reports.aspx?source=2%20&amp;series=EN.ATM.PM25.MC.M3&amp;country=#</a></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Table 1.3: PM2.5 Emissions Database</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variables</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Country</td>
+<td style="text-align: left;">Country</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">Year</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PM2.5</td>
+<td style="text-align: left;">Number of particules that is 2.5 micrometers or smaller (in µg/m³)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="population" class="level3">
+<h3 class="anchored" data-anchor-id="population">2.1.4 Population</h3>
+<p>In order to accurately calculate our renewable energy generation per capita, we have also incorporated a comprehensive global population database, sourced again from ‘The World Bank’. This additional data enables us to normalize energy generation figures against population sizes, ensuring a more precise and meaningful analysis of renewable energy’s impact on a per capita basis.</p>
+<p>Source: <a href="https://databank.worldbank.org/reports.aspx?source=2&amp;series=SP.POP.TOTL&amp;country=#">https://databank.worldbank.org/reports.aspx?source=2&amp;series=SP.POP.TOTL&amp;country=#</a></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Table 1.4: PM2.5 Emissions Database</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variables</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Country</td>
+<td style="text-align: left;">Country</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">Year</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Population</td>
+<td style="text-align: left;">Number of inhabitants in the country</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+</section>
+<section id="data-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="data-wrangling">2.2 Data wrangling</h2>
+<p>During the data wrangling phase, we processed four distinct datasets, each demanding a tailored approach to cleaning and wrangling. These was necessary to guarantee the datasets’ suitability for our subsequent analysis. The end result of these efforts was the creation of a consolidated and final dataframe, named <code>raw_df</code>.</p>
+<section id="merged_renew-dataframe" class="level3">
+<h3 class="anchored" data-anchor-id="merged_renew-dataframe">2.2.1 Merged_renew dataframe</h3>
+<p>The first dataframe that we focused our efforts on was a comprehensive dataframe dedicated to renewable energy. This dataframe originated from an excel file comprised of 62 sheets. In order to access the pertinent data we had to extract five specific sheets, each corresponding to distinct sources of global renewable energy generation, and arrived in wide format.</p>
+<details>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#    merged_renew    #</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the file path</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>path_renew <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"Data/Data_sustainable_energy.xlsx"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the names of the excel sheets</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Renewables_sheets <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Wind Generation - TWh"</span>, <span class="st">"Solar Generation - TWh"</span>, <span class="st">"Geo Biomass Other - TWh"</span>, <span class="st">"Hydro Generation - TWh"</span>, <span class="st">"Nuclear Generation - TWh"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the specific sheets into a list of dataframes</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Renewables_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(Renewables_sheets, <span class="cf">function</span>(sheet_name) {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_xlsx</span>(path_renew, <span class="at">sheet =</span> sheet_name)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Name the dataframes</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Renewables_list) <span class="ot">&lt;-</span> Renewables_sheets</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Bring the dataframes to the global environment</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">list2env</span>(Renewables_list ,.GlobalEnv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Following the initial data extraction, our next step involved refining the structure of the dataframes. As the data originated from an Excel format that included buffer rows unsuitable for our analytical purposes, we needed to remove these unnecessary entries. Our largest challenge arose from the fact that our dataframes were initially organized in a wide format. We needed a versatile function capable of transforming these dataframes into a long format, whilst also taking into account changing the type of the <code>year</code> variable, and addressing issues such as superfluous columns. Resulting in a standardized long format for comprehensive analysis.</p>
+<details>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to pivot our df</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>process_data <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Set the coerced years as column names</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the years from the first row of the data frame and coerce them to integers</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.character</span>(df[<span class="dv">1</span>, ]))  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove the first row (useless)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df[<span class="sc">-</span><span class="dv">1</span>,]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rename the first column to "country"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(df)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"country"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># We delete 3 columns (they have no interest and useless columns)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df[, <span class="fu">head</span>(<span class="fu">seq_along</span>(df), <span class="sc">-</span><span class="dv">3</span>)]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pivot of the data</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  long_format_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> <span class="sc">-</span>country,   <span class="co"># Select all columns except the "country"</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="co"># Column names go into the "year" column</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"TWh"</span>  <span class="co"># Values go into the "TWh" column</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(long_format_df)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Use process_data to get our pivot df</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>wind_df <span class="ot">&lt;-</span> <span class="fu">process_data</span>(Cleaned_Renewables_list[[<span class="dv">1</span>]])</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>solar_df <span class="ot">&lt;-</span> <span class="fu">process_data</span>(Cleaned_Renewables_list[[<span class="dv">2</span>]])</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>geo_df <span class="ot">&lt;-</span> <span class="fu">process_data</span>(Cleaned_Renewables_list[[<span class="dv">3</span>]])</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>hydro_df <span class="ot">&lt;-</span> <span class="fu">process_data</span>(Cleaned_Renewables_list[[<span class="dv">4</span>]])</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>nuclear_df <span class="ot">&lt;-</span> <span class="fu">process_data</span>(Cleaned_Renewables_list[[<span class="dv">5</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>The final step before merging our 5 renewable energy dataframes was to rename their value column to <code>"sources"_generation</code>, as it was necessary to differentiate between each source. Initially, they were all named “TWh”. Finally we merged each renewable energy dataframes into <code>merged_renew</code>.</p>
+<details>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#      Merge our renewables energies df's    #</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">##############################################</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns in the original dataframes</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>wind_df <span class="ot">&lt;-</span> wind_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">wind_generation =</span> TWh)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>solar_df <span class="ot">&lt;-</span> solar_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">solar_generation =</span> TWh)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>geo_df <span class="ot">&lt;-</span> geo_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">geo_generation =</span> TWh)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>hydro_df <span class="ot">&lt;-</span> hydro_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">hydro_generation =</span> TWh)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>nuclear_df <span class="ot">&lt;-</span> nuclear_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">nuclear_generation =</span> TWh)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Sequentially merge the dataframes</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>merged_renew <span class="ot">&lt;-</span> wind_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(solar_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>), <span class="at">all =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(geo_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>), <span class="at">all =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(hydro_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>), <span class="at">all =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(nuclear_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>), <span class="at">all =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Once our dataframe was merged, we noticed that some countries were consistently missing values. On closer observation, these countries all had a geopolitical change at some point in time which altered the collection of data. For example, since the dissolution of USSR occurred in 1984, values were not present prior to that year for many countries.</p>
+<details>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "year" to numeric in merged_renew and drop NA for countries with a geopolitical change</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>merged_renew <span class="ot">&lt;-</span> merged_renew <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      (country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Slovenia"</span>, <span class="st">"Croatia"</span>, <span class="st">"North Macedonia"</span>) <span class="sc">&amp;</span> year <span class="sc">&lt;</span> <span class="dv">1990</span>) <span class="sc">|</span> <span class="co"># Remove year under 1990 for those 3 countries as they were part from yugoslavia so we can't have data before 1990</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      (country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Azerbaijan"</span>, <span class="st">"Belarus"</span>, <span class="st">"Latvia"</span>, <span class="st">"Lithuania"</span>, <span class="st">"Kazakhstan"</span>, <span class="st">"Russian Federation"</span>, <span class="st">"Ukraine"</span>, <span class="st">"Estonia"</span>, <span class="st">"Turkemenistan"</span>, <span class="st">"Uzbekistan"</span>) <span class="sc">&amp;</span> year <span class="sc">&lt;</span> <span class="dv">1984</span>) <span class="sc">|</span> <span class="co"># Remove year under 1984 for those countries as they were part from USSR so we can't have data before 1984</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      (country <span class="sc">==</span> <span class="st">"Bangladesh"</span> <span class="sc">&amp;</span> year <span class="sc">&lt;</span> <span class="dv">1970</span>) <span class="co"># Remove year under 1970 for Bangladesh as it was part from India so we can't have data before 1970</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>         )) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="co2-emissions-population-and-pm2.5-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="co2-emissions-population-and-pm2.5-dataframes">2.2.2 CO2 emissions, population and PM2.5 dataframes</h3>
+<p>For the <code>co2_df</code>, <code>Pop_df</code>, and <code>PM_df</code> dataframes we performed typical wrangling steps, which consisted of removing missing values, renaming columns to ensure a consistent structure and pivoting. One particular challenge was changing the format of the years using the gsub function, e.g “1965” had the following format “1965[YR1965]”.</p>
+<details>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#      co2_df      #</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">####################</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns of co2_df</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>co2_df <span class="ot">&lt;-</span> co2_df <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">CO2_emissions</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Annual CO₂ emissions (per capita)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">country =</span> Entity) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">year =</span> Year)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the "year" column to numeric in co2_df</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>co2_df <span class="ot">&lt;-</span> co2_df <span class="sc">%&gt;%</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if CO2_df contains missing values : NA or ".."</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>missing_values <span class="ot">&lt;-</span> <span class="fu">any</span>(<span class="fu">is.na</span>(co2_df) <span class="sc">|</span> co2_df <span class="sc">==</span> <span class="st">".."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><em>Note: The same steps were more or less followed for <code>PM_df</code> and <code>Pop_df</code>.</em></p>
+</section>
+<section id="raw_df" class="level3">
+<h3 class="anchored" data-anchor-id="raw_df">2.2.3 raw_df</h3>
+<p>Once our 4 dataframes (<code>merged_renew</code>, <code>co2_df</code>, <code>PM_df</code>, <code>Pop_df</code>), were wrangled and cleaned we commenced the merging process. However, once merged, we noticed some important countries were no longer present. After checking our datasets, we found discrepancies in the naming of the countries. In fact, between the 4 dataframes, before merging, the country names weren’t standardized. Therefore, we standardized the country name to correspond to <code>merged_renew</code> naming.</p>
+<details>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#      Country name replacements for Pop, CO2, PM dfs        #</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">##############################################################</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --&gt; to standardize the country names in our final df as there is some change between the data sets</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># List of country name replacements</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>country_replacements <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"United States"</span> <span class="ot">=</span> <span class="st">"US"</span>, <span class="st">"Czechia"</span> <span class="ot">=</span> <span class="st">"Czech Republic"</span>, <span class="st">"Egypt, Arab Rep."</span> <span class="ot">=</span> <span class="st">"Egypt"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Iran, Islamic Rep."</span> <span class="ot">=</span> <span class="st">"Iran"</span>, <span class="st">"Russia"</span> <span class="ot">=</span> <span class="st">"Russian Federation"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Slovak Republic"</span> <span class="ot">=</span> <span class="st">"Slovakia"</span>, <span class="st">"Korea, Rep."</span> <span class="ot">=</span> <span class="st">"South Korea"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Trinidad and Tobago"</span> <span class="ot">=</span> <span class="st">"Trinidad &amp; Tobago"</span>, <span class="st">"Turkiye"</span> <span class="ot">=</span> <span class="st">"Turkey"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Venezuela, RB"</span> <span class="ot">=</span> <span class="st">"Venezuela"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to apply country renaming to a dataset</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>rename_countries <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(country <span class="sc">%in%</span> <span class="fu">names</span>(country_replacements),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                            country_replacements[country],</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                            country))</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the renaming to the Pop_df, CO2_df, and PM_df</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>Pop_df <span class="ot">&lt;-</span> <span class="fu">rename_countries</span>(Pop_df)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>co2_df <span class="ot">&lt;-</span> <span class="fu">rename_countries</span>(co2_df)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>PM_df <span class="ot">&lt;-</span> <span class="fu">rename_countries</span>(PM_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Then we merged our 4 dataframes into <code>raw_df</code> with a left join on <code>merged_renew</code>.</p>
+<details>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#     Merge PM_df, CO2_df, Pop_df with merged_renew     #</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">#########################################################</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>raw_df <span class="ot">&lt;-</span> merged_renew <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(PM_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(co2_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(Pop_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># raw_df contains all the renewable energy generation, co2 emissions per capita and PM exposure of all countries and all years from 1965 to 2022</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange column order to have dependent variables first</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>raw_df <span class="ot">&lt;-</span> raw_df <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, CO2_emissions, PM_exposure, <span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(.)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>From <code>raw_df</code>, we noticed that some observations weren’t countries but regions, or groupings of countries such as continents, organisations (OCDE), and others. We then checked all the non country observations to remove them. Finally, we end up with the following dataframe :</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 3%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">CO2_emissions</th>
+<th style="text-align: right;">PM_exposure</th>
+<th style="text-align: right;">wind_generation</th>
+<th style="text-align: right;">solar_generation</th>
+<th style="text-align: right;">geo_generation</th>
+<th style="text-align: right;">hydro_generation</th>
+<th style="text-align: right;">nuclear_generation</th>
+<th style="text-align: right;">Population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">United Arab Emirates</td>
+<td style="text-align: right;">1982</td>
+<td style="text-align: right;">31.470</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Luxembourg</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">22.889</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.061</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.070</td>
+<td style="text-align: right;">0.132</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">3.989</td>
+<td style="text-align: right;">13.5</td>
+<td style="text-align: right;">4.996</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">1.476</td>
+<td style="text-align: right;">27.505</td>
+<td style="text-align: right;">8.44</td>
+<td style="text-align: right;">44938712</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ecuador</td>
+<td style="text-align: right;">1983</td>
+<td style="text-align: right;">2.217</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">1.721</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">1967</td>
+<td style="text-align: right;">4.477</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">3.475</td>
+<td style="text-align: right;">42.340</td>
+<td style="text-align: right;">3.15</td>
+<td style="text-align: right;">52900500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Slovenia</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">7.759</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">3.739</td>
+<td style="text-align: right;">4.70</td>
+<td style="text-align: right;">1983045</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Morocco</td>
+<td style="text-align: right;">1969</td>
+<td style="text-align: right;">0.391</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">1.368</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">14876982</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">5.401</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">7.577</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">2.271</td>
+<td style="text-align: right;">8.285</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Venezuela</td>
+<td style="text-align: right;">1973</td>
+<td style="text-align: right;">5.347</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">6.225</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">12424804</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Belarus</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">5.970</td>
+<td style="text-align: right;">21.0</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.036</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Latvia</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">3.812</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.058</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.045</td>
+<td style="text-align: right;">3.109</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Colombia</td>
+<td style="text-align: right;">1995</td>
+<td style="text-align: right;">1.634</td>
+<td style="text-align: right;">28.3</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.477</td>
+<td style="text-align: right;">31.989</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">35970101</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Croatia</td>
+<td style="text-align: right;">1996</td>
+<td style="text-align: right;">3.645</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">7.863</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4557097</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: right;">1977</td>
+<td style="text-align: right;">2.390</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.234</td>
+<td style="text-align: right;">9.966</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">9455675</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: right;">1977</td>
+<td style="text-align: right;">11.808</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.867</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">3.71</td>
+<td style="text-align: right;">13856185</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><em>Note: Sample of <code>raw_df</code>. For PM_exposure, we only have observations for 1990, 1995, 2000, 2005, 2010-2019, hence the NAs for that column.</em></p>
+</section>
+<section id="filtering-raw_df-for-deeper-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-raw_df-for-deeper-analysis">2.2.4 Filtering raw_df for deeper analysis</h3>
+<p>With <code>raw_df</code>, we have all of the essentials data needed for deeper analysis. <code>raw_df</code> is composed of 77 countries with values ranging from 1965 to 2021 for 4215 observations with 10 variables. We used this final dataframe as a basis for further analysis.</p>
+<p>From <code>raw_df</code>, we created a per capita dataframe, <code>all_df</code> by dividing our renewable energy variables by population. <code>all_df</code> is our second main dataframes as the primary difference with <code>raw_df</code> is that we have per capita values for all of our renewable energy variables. We used this dataframe when comparing CO2 emissions and renewable energy to standardize the scale.</p>
+<details>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Drop any row without a Population  #</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>all_df <span class="ot">&lt;-</span> raw_df <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">complete.cases</span>(Population)) <span class="co"># --&gt; 77 countries</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We voluntarily created a "raw_df" to have the total of energy generation, co2 emissions and PM exposure for all the years (independent from the population)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># and then "all_df" where we remove missing values of population to compute renewable energy generation per capita</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#    Computing renewable energy generation variables per capita     #</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">#####################################################################</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate through columns and divide by population</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (colname <span class="cf">in</span> <span class="fu">colnames</span>(all_df)) {</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Skip the columns 'country', 'year', 'CO2_emissions', and 'Population'</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>colname <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'country'</span>, <span class="st">'year'</span>, <span class="st">'CO2_emissions'</span>, <span class="st">'Population'</span>)) {</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Identify rows where the column value is not NA</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    valid_rows <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(all_df[[colname]])</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the entire column (excluding NA values) is numeric</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">all</span>(<span class="fu">sapply</span>(all_df[valid_rows, colname], is.numeric))) {</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Only perform operation on those valid rows</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>      all_df[valid_rows, colname] <span class="ot">&lt;-</span> all_df[valid_rows, colname] <span class="sc">/</span> all_df[valid_rows, <span class="st">'Population'</span>]</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After creating <code>all_df</code>we created multiple sub dataframes filtering for years and separating developed and non developed countries :</p>
+<ul>
+<li>All Countries</li>
+<li>All Countries (Since 1990)</li>
+<li>Developed Countries Only</li>
+<li>Developed Countries (Since 1990)</li>
+<li>Non-Developed Countries Only</li>
+<li>Non-Developed Countries (Since 1990)</li>
+</ul>
+<p>Additionally, we multiplied each of the 6 datasets by 100. This scaling is particularly useful for log transformations in our analysis, enhancing the interpretability of results, especially when dealing with small per capita values.</p>
+<details>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#     df from 1990 to 2021       #</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>raw_1990 <span class="ot">&lt;-</span> raw_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>all_1990 <span class="ot">&lt;-</span> all_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># We choose 1990 as before that date there weren't many renewable energy generations which doesn't help us to analyse a significant effect</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#    df with only developped countries    #</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list of developed countries</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>developed_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Australia"</span>, <span class="st">"Austria"</span>, <span class="st">"Belgium"</span>, <span class="st">"Canada"</span>, <span class="st">"Cyprus"</span>, </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Czech Republic"</span>, <span class="st">"Denmark"</span>, <span class="st">"Estonia"</span>, <span class="st">"Finland"</span>, <span class="st">"France"</span>, </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Germany"</span>, <span class="st">"Greece"</span>, <span class="st">"Hungary"</span>, <span class="st">"Iceland"</span>, <span class="st">"Ireland"</span>, <span class="st">"Israel"</span>, </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Italy"</span>, <span class="st">"Japan"</span>, <span class="st">"Latvia"</span>, <span class="st">"Lithuania"</span>, <span class="st">"Luxembourg"</span>, </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Netherlands"</span>, <span class="st">"New Zealand"</span>, <span class="st">"Norway"</span>, <span class="st">"Poland"</span>, <span class="st">"Portugal"</span>, </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Slovakia"</span>, <span class="st">"Slovenia"</span>, <span class="st">"Spain"</span>, <span class="st">"Sweden"</span>, <span class="st">"Switzerland"</span>, </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"United Kingdom"</span>, <span class="st">"US"</span>, <span class="st">"South Korea"</span>, <span class="st">"Singapore"</span>, <span class="st">"Qatar"</span>, </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"United Arab Emirates"</span>, <span class="st">"Mexico"</span>, <span class="st">"Saudi Arabia"</span>, <span class="st">"China"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>developed_df <span class="ot">&lt;-</span> all_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">%in%</span> developed_countries) <span class="co"># --&gt; 40 countries with per capita values</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>rawdev_df <span class="ot">&lt;-</span> raw_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">%in%</span> developed_countries) <span class="co"># --&gt; 40 countries with total values</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#    df with only developped countries from 1990    #</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="do">#####################################################</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>developed_1990 <span class="ot">&lt;-</span> developed_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>rawdev_1990 <span class="ot">&lt;-</span> rawdev_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#    df with non developped countries    #</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>nondev_df <span class="ot">&lt;-</span> all_df[<span class="sc">!</span>all_df<span class="sc">$</span>country <span class="sc">%in%</span> developed_countries, ] <span class="co"># --&gt; 37 countries with per capita values</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>rawnondev_df <span class="ot">&lt;-</span> raw_df[<span class="sc">!</span>all_df<span class="sc">$</span>country <span class="sc">%in%</span> developed_countries, ] <span class="co"># --&gt; 37 countries with total values</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#    df with non developped countries from 1990   #</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="do">###################################################</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>nondev_1990 <span class="ot">&lt;-</span> nondev_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>rawnondev_1990 <span class="ot">&lt;-</span> rawnondev_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co">#        multiply df by 100          #</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="do">######################################</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co"># This will allow to make the log scaling more readable for our analysis as we have very low values per capita</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="co"># all100_df : mutliply all_df by 100</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>all100_df <span class="ot">&lt;-</span> all_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">.cols =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">.fns =</span> <span class="sc">~</span> . <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="co"># raw100_df : mutliply raw_df by 100</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>raw100_df <span class="ot">&lt;-</span> raw_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">.cols =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">.fns =</span> <span class="sc">~</span> . <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="co"># raw100_1990 : keep only year from 1990 of raw100_df</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>raw100_1990 <span class="ot">&lt;-</span> raw100_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="co"># rawdev100_1990 : keep only year from 1990 and dev country</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>rawdev100_1990 <span class="ot">&lt;-</span> rawdev_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">.cols =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">.fns =</span> <span class="sc">~</span> . <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>  ))  <span class="sc">%&gt;%</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="co"># rawdev100_1990 : keep only year from 1990 and nondev country</span></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>rawnondev100_1990 <span class="ot">&lt;-</span> rawnondev_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">.cols =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">.fns =</span> <span class="sc">~</span> . <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>  ))  <span class="sc">%&gt;%</span></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, year <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the intermediate df / lists</span></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(Pop_df, PM_df, co2_df, merged_renew, Cleaned_Renewables_list, geo_df, <span class="st">`</span><span class="at">Geo Biomass Other - TWh</span><span class="st">`</span>, <span class="st">`</span><span class="at">Hydro Generation - TWh</span><span class="st">`</span>, hydro_df, <span class="st">`</span><span class="at">Nuclear Generation - TWh</span><span class="st">`</span>, nuclear_df, Renewables_list, <span class="st">`</span><span class="at">Solar Generation - TWh</span><span class="st">`</span>, solar_df, <span class="st">`</span><span class="at">Wind Generation - TWh</span><span class="st">`</span>, wind_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</details></section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

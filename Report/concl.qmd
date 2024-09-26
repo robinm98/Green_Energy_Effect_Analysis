@@ -1,0 +1,39 @@
+# Conclusion
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+source(here::here("Transcript/setup.R"))
+```
+
+## Results
+
+In summary, our analysis provides valuable insights into the intricate dynamics of sustainable energy generation and its impact on carbon dioxide (CO2) emissions and air quality. Contrary to expectations, our analysis reveal a positive association between the annual renewable energy production and the annual CO2 emissions. All sources, except solar, presented significant and positive coefficients in our modeling, suggesting that increasing renewable energy generation is associated with higher CO2 emissions. Additionally, graphic analysis highlights the global growth in adoption of renewables, with powerhouse countries such as China and the US leading the way in scaling up. On a per capita basis, wealthy smaller nations, such as Scandinavian countries, are achieving higher green energy production per capita. As for CO2 emissions, although globally on the rise, per capita rates appear to be dropping in developed countries. PM2.5 levels show slight decreases, but insufficient data is available to establish a definitive trend.
+
+## Limitations
+
+Despite these findings, our analysis grapples with several limitations that merit consideration. Causation remains challenging to definitively establish due to the multitude of omitted factors influencing CO2 emissions and air quality. Economic variables, such as GDP, trade, and consumption, play pivotal roles in CO2 emissions and were not comprehensively accounted in our models. The reliance on country-level values for PM2.5 measures introduces biases, as these values might not capture localized variations in air quality within countries. Additionally, the limited number of years of available data restricts the depth of our temporal analysis and hinders the ability to draw robust conclusions about long-term trends. Future research with more extensive datasets and economic variables can enhance our understanding of the complex interplay between sustainable energy adoption, emissions, and air quality.
+
+## Future work
+
+To enhance our understanding, future research should adopt a more granular approach, exploring country-specific relationships and delving into the impact of specific policies and technological advancements over time. A closer examination of regional variations and the role of governmental interventions could provide interesting insights. Continuous monitoring and regular updates to our dataset will be vital for staying abreast of the evolving trends in renewable energy adoption and understanding its broader implications. Additionally, investigating the socio-economic factors that mediate the relationship between renewable energy adoption and environmental outcomes could offer a more comprehensive perspective.
+
+# References
+
+Database : 
+
+Renewable energy generation from the "Energy Institute" :
+[https://www.energyinst.org/statistical-review/resources-and-data-downloads](https://www.energyinst.org/statistical-review/resources-and-data-downloads])
+
+CO2 Emissions Per Capita from "Climate Watch" : 
+[https://www.climatewatchdata.org/data-explorer](https://www.climatewatchdata.org/data-explorer)
+
+PM2.5 Exposure Level from the "World Bank" : 
+[https://databank.worldbank.org/reports.aspx?source=2%20&series=EN.ATM.PM25.MC.M3&country=#](https://databank.worldbank.org/reports.aspx?source=2%20&series=EN.ATM.PM25.MC.M3&country=#)
+
+Population per Country from the "World Bank" : 
+[https://databank.worldbank.org/reports.aspx?source=2&series=SP.POP.TOTL&country=#](https://databank.worldbank.org/reports.aspx?source=2&series=SP.POP.TOTL&country=#)
+
+Kuwait Oil Fire in 1991 : 
+[https://visibleearth.nasa.gov/images/78594/kuwait-oil-fires](https://visibleearth.nasa.gov/images/78594/kuwait-oil-fires)
+
+
+

@@ -1,0 +1,39 @@
+# Introduction
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+source(here::here("Transcript/setup.R"))
+```
+
+## Overview and Motivation
+
+Renewable energy sources are increasingly becoming integral to addressing climate change and promoting sustainability. In recent years, significant advancements in renewable energy technologies have positioned them as pivotal solutions to the world's pressing environmental challenges. This growing reliance on renewable energy underscores the importance of understanding the key challenges society faces in achieving sustainability and combating climate change. 
+
+Our motivation for this project stems from the pressing need to tackle global environmental challenges, particularly the reduction of greenhouse gas emissions and the improvement of air quality. We are driven by a strong research interest in environmental science and sustainable energy technologies. Our aim is to provide data-driven insights into how sustainable energy generation contributes to a change in CO2 emission and particulate matter (PM 2.5). By conducting this research, we hope to make valuable contributions to the fields of environmental science and energy policy, fostering a cleaner and more sustainable future.
+
+The benefits of this research extend to:
+
+- **Policy Development**: By quantifying the impact of sustainable energy, our findings can inform more effective environmental policies and strategies.
+- **Technology Advancement**: Identifying the most effective types of sustainable energy sources will encourage innovation and investment in those areas.
+- **Public Awareness**: Our research contributes to public knowledge, highlighting the importance of sustainable energy in combating environmental issues.
+
+
+From this project, we expect to extract crucial information, including:
+
+- **Statistical Evidence**: Quantitative data on the relationship between sustainable energy generation and CO2 emission levels.
+- **Comparative Analysis**: A comparison of the impact of different sustainable energy sources on environmental metrics.
+- **Trend Analysis**: Identifying patterns and trends over time in the adoption of sustainable energy and its effects on CO2 emissions and air quality.
+
+## Project Objectives
+
+The main objectives of our project are the following:
+
+1. **Quantify Impact**: Determine the extent to which sustainable energy generation affects CO2 emissions.
+2. **Identify Key Factors**: Uncover which types of sustainable energy sources have the most significant impact on reducing emissions.
+3. **Assess Air Quality Effects**: Determine how the effect of sustainable energy on CO2 emissions contributes to the improvement of air quality (reduction of PM 2.5).
+
+## Research Questions
+
+1. To what extent does sustainable energy generation impact carbon dioxide emissions?
+2. What are the key factors and types of sustainable energy sources that have the most significant impact on reducing CO2 emissions?
+3. How does sustainable energy generation impact the quality of air (reduction of PM 2.5)?
+4. Is there a temporal trend between the growth of sustainable energy generation and the reduction in CO2 emissions and what implications does this trend hold for future sustainability efforts?
